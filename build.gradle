@@ -24,7 +24,7 @@ allprojects {
             url 'http://git.comjia.com:8888/Android/JLRepo/raw/master/'
             credentials(HttpHeaderCredentials) {
                 name = "Private-Token"
-                value = "jKBnyzvGGjKsmMEPgUqV"
+                value = "xxx"
             }
             authentication {
                 header(HttpHeaderAuthentication)

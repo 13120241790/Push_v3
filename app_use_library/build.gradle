@@ -90,6 +90,6 @@ dependencies {
     //oppo
     implementation files("libs/com.heytap.msp-push-2.1.0.aar")
 
-//    implementation 'com.comjia:push:2.0.0' //远程依赖
+//    implementation 'com.comjia:push:2.0.2' //远程依赖
     implementation project(path: ':library')
 }
