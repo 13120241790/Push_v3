@@ -78,7 +78,7 @@ TODO
 
 库的日志过滤关键字为 jlpush ，以下以小米为例做一个成功流程的日志分析:
 
-![20191114140320](https://github.com/13120241790/Push/images/20191114140320.jpg)
+![20191114140320](https://github.com/13120241790/Push/blob/master/images/20191114140320.jpg)
 
 
 
@@ -86,7 +86,7 @@ TODO
 
 http://admin.xmpush.xiaomi.com/ 
 
-![20191113095233](https://github.com/13120241790/Push/images/20191113095233.jpg)
+![20191113095233](https://github.com/13120241790/Push/blob/master/images/20191113095233.jpg)
 
 3 华为推送管理后台
 
@@ -94,7 +94,7 @@ http://admin.xmpush.xiaomi.com/
 
 [极光推送管理后台](https://www.jiguang.cn/jpush2/#/app/0dc337f2661e3264374bcd05/push_form/notification)
 
-![20191113102409](https://github.com/13120241790/Push/images/20191113102409.jpg)
+![20191113102409](https://github.com/13120241790/Push/blob/master/images/20191113102409.jpg)
 
 
 
