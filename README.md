@@ -38,7 +38,7 @@
 
 
 
-![20191024170534](https://github.com/13120241790/Push/images/20191024170534.jpg)
+![20191024170534](https://github.com/13120241790/Push/blob/master/images/20191024170534.jpg)
 
 
 
