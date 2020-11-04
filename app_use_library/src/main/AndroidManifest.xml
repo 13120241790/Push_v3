@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.comjia.push">
+
+    <application
+        android:allowBackup="true"
+        android:name=".App"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".OppoPushDispatchActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:launchMode="singleTask"
+            android:screenOrientation="behind"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="app.comjia.com"
+                    android:path="/oppopush"
+                    android:scheme="push" />
+            </intent-filter>
+        </activity>
+        <!--push://app.comjia.com/oppopush?goodsId=10011002 按照此例子协议可以自定义配置 在 OPPO 后台为 schemeUrl 配置 -->
+        <receiver
+            android:name=".AppPushReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.comjia.push.intent.MESSAGE_ARRIVED" />
+                <action android:name="com.comjia.push.intent.MESSAGE_CLICKED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

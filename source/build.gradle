@@ -1,0 +1,108 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        debug {
+            manifestPlaceholders = [
+                    JPUSH_PKGNAME: 'com.comjia.push',
+                    JPUSH_APPKEY : "0dc337f2661e3264374bcd05", //JPush 上注册的包名对应的 Appkey.
+                    JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+
+                    HUAWEI_APPID : "101221803",
+
+                    XIAOMI_APPID : "xiaomi_2882303761518212082",
+                    XIAOMI_APPKEY: "xiaomi_5671821258082",
+
+                    VIVO_APPID   : "105005813",
+                    VIVO_APPKEY  : "c112ae30cc14d70eb2887d8383776ca4",
+
+                    OPPO_APPKEY  : "4834d842ac03433c8b6ea7576657f705",
+                    OPPO_SECRET  : "9b3bfa75ca394e8296318fa251380255"
+            ]
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [
+                    JPUSH_PKGNAME: 'com.comjia.push',
+                    JPUSH_APPKEY : "0dc337f2661e3264374bcd05", //JPush 上注册的包名对应的 Appkey.
+                    JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+
+                    HUAWEI_APPID : "101221803",
+
+                    XIAOMI_APPID : "xiaomi_2882303761518212082",
+                    XIAOMI_APPKEY: "xiaomi_5671821258082",
+
+                    VIVO_APPID   : "105005813",
+                    VIVO_APPKEY  : "c112ae30cc14d70eb2887d8383776ca4",
+
+                    OPPO_APPKEY  : "4834d842ac03433c8b6ea7576657f705",
+                    OPPO_SECRET  : "9b3bfa75ca394e8296318fa251380255"
+            ]
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //vivo推送
+    implementation files("libs/vivo_pushsdk-v2.9.0.0.aar")
+    //oppo
+    implementation files("libs/com.heytap.msp-push-2.1.0.aar")
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    api 'com.huawei.android.hms:base:2.6.3.301'
+    api 'com.huawei.android.hms:push:2.6.3.301'
+    api 'cn.jiguang.sdk:jpush:3.3.6'
+    api 'cn.jiguang.sdk:jcore:2.1.6'
+}
+
+
+//生成 jar 名字
+def JAR_NAME = "Push"
+//生成 jar 路径
+def OUTPUT_PATH = "../library/libs/"
+
+task makeJar(type: Jar) {
+
+    from zipTree(file('build/intermediates/compile_library_classes/debug/classes.jar'))
+
+    //去除编译生成的临时文件
+    exclude('**/BuildConfig.class')
+    exclude('**/BuildConfig\$*.class')
+    exclude('**/R.class')
+    exclude('**/R\$*.class')
+//    exclude('**/assets/**')
+//    exclude('**/assets/pushresources/**')
+//    exclude('**/assets/pushresources')
+//    exclude('**/assets')
+    exclude('**/*_version')
+
+    baseName JAR_NAME
+    destinationDir file(OUTPUT_PATH)
+}
+
+task clearJar(type: Delete) {
+    delete OUTPUT_PATH + JAR_NAME + '.jar'
+}
+
+makeJar.dependsOn(clearJar, build)
+
