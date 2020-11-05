@@ -32,6 +32,22 @@
    api 'cn.jiguang.sdk:jcore:2.1.6'
   ```
 
+- Vivo Push 
+
+  ```bash
+  libs/vivo_pushsdk-v2.9.0.0.aar
+  ```
+
+  
+
+- OPPO Push 
+
+  ```bash
+  libs/com.heytap.msp-push-2.1.0.aar
+  ```
+
+  
+
 - minSdkVersion 16
 
 ### 二 流程
@@ -60,9 +76,153 @@
 
       访问小米、华为、极光推送平台注册账号、随后创建应用。获取各个平台的 secret  appkey  appid 等重要数据
 
+Gradlle 配置：
 
+```groovy
+    buildTypes {
+        debug {
+            manifestPlaceholders = [
+                    JPUSH_PKGNAME: 'Your packgename',
+                    JPUSH_APPKEY : "xxx", //JPush 上注册的包名对应的 Appkey.
+                    JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+
+                    HUAWEI_APPID : "xxx",
+
+                    XIAOMI_APPID : "xiaomi_xxx",
+                    XIAOMI_APPKEY: "xiaomi_xxx",
+
+                    VIVO_APPID   : "xxx",
+                    VIVO_APPKEY  : "xxx",
+
+                    OPPO_APPKEY  : "xxx",
+                    OPPO_SECRET  : "xxx"
+            ]
+        }
+        release{
+        ...
+        }
+```
+
+将各个平台的 push 包在工程进行依赖，需要哪个平台就添加哪个平台即可 ，Push 框架已做按需取用处理
 
 ### 五 接入步骤
+
+1 module 、aar、maven 三种方式择其一依赖 Push 库
+
+2 建议在 application 或者 main 做初始化工作
+
+```java
+            PushClient.init(this, new PushConfig(), new PushStatusListener() {
+                @Override
+                public void onRegister(String registerId, PushType pushType) {
+                    Log.e(App.class.getSimpleName(), "push type: " + pushType.getName() + " push regId :" + registerId);
+                }
+
+                @Override
+                public void onError(String error, PushType pushType) {
+
+                }
+
+                @Override
+                public void onPushConnected() {
+
+                }
+            });
+```
+
+3 新建广播 extends com.julive.push.core.PushReceiver , 示例如下：
+
+```java
+public class AppPushReceiver extends PushReceiver {
+
+    public static final String TAG = AppPushReceiver.class.getSimpleName();
+
+    @Override
+    public boolean onNotificationMessageArrived(Context context, PushType pushType, String notificationMessage) {
+        Log.e(TAG, "onNotificationMessageArrived push type ：" + pushType + " message ：" + notificationMessage);
+        return false;
+    }
+
+    @Override
+    public boolean onNotificationMessageClicked(Context context, PushType pushType, String notificationMessage) {
+        Log.e(TAG, "onNotificationMessageClicked push type ：" + pushType + " message ：" + notificationMessage);
+        Log.e(TAG, context.toString());
+        return false;
+    }
+}
+```
+
+```xml
+        <receiver
+            android:name=".AppPushReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.comjia.push.intent.MESSAGE_ARRIVED" />
+                <action android:name="com.comjia.push.intent.MESSAGE_CLICKED" />
+            </intent-filter>
+        </receiver>
+```
+
+4 其他用法
+
+a: 应用存活时接受透传消息等
+
+```java
+        PushClient.setOnPushActionListener(new OnPushActionListener() {
+            @Override
+            public void onNotificationReceived(String message, PushType pushType) {
+                Log.e(TAG, "Listener onNotificationReceived pushType：" + pushType.getName() + " message：" + message);
+            }
+
+            @Override
+            public void onNotificationOpened(String message, PushType pushType) {
+                Log.e(TAG, "Listener onNotificationOpened pushType：" + pushType.getName() + " message：" + message);
+            }
+
+            @Override
+            public void onTransparentMessage(String message, PushType pushType) {
+                Log.e(TAG, "Listener onTransparentMessage pushType：" + pushType.getName() + " message：" + message);
+            }
+        });
+```
+
+
+
+b: OPPO 不支持广播接收，如果需要定制跳转页面则需：
+
+```java
+public class OppoPushDispatchActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Intent i = getIntent();
+        Uri uri = i.getData();
+        Log.e(PUSH_TAG,"oppo clicked ：" + uri.toString());
+    }
+}
+```
+
+```xml
+        <activity
+            android:name=".OppoPushDispatchActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout"
+            android:launchMode="singleTask"
+            android:screenOrientation="behind"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="app.comjia.com"
+                    android:path="/oppopush"
+                    android:scheme="push" />
+            </intent-filter>
+        </activity>
+        <!--push://app.comjia.com/oppopush?goodsId=10011002 按照此例子协议可以自定义配置 在 OPPO 后台为 schemeUrl 配置 -->
+```
+
+
 
 
 
@@ -111,6 +271,4 @@ http://admin.xmpush.xiaomi.com/
    A: 极光推送进程存活消息抵达和通知事件都能收到，进程被杀死后均无法收到推送。  
    
    
-
-### 十 ReleaseNote
 
