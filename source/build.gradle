@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'maven'
 
 android {
     compileSdkVersion 29
@@ -8,7 +10,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "2.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -62,9 +64,7 @@ dependencies {
     //vivo推送
     implementation files("libs/vivo_pushsdk-v2.9.0.0.aar")
     //oppo
-    implementation files("libs/com.heytap.msp-push-2.1.0.aar")
-
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    api 'com.comjia.push:oppo:1.1.7'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -73,6 +73,8 @@ dependencies {
     api 'com.huawei.android.hms:push:2.6.3.301'
     api 'cn.jiguang.sdk:jpush:3.3.6'
     api 'cn.jiguang.sdk:jcore:2.1.6'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 
@@ -105,4 +107,25 @@ task clearJar(type: Delete) {
 }
 
 makeJar.dependsOn(clearJar, build)
+
+ext {
+    PUBLISH_GROUP_ID = 'com.comjia'
+    PUBLISH_ARTIFACT_ID = 'push'
+    PUBLISH_VERSION = android.defaultConfig.versionName
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        def deployPath = file("/Users/macbook/Documents/julive/JLRepo")
+        repository(url: "file://${deployPath.absolutePath}")
+        pom.project {
+            groupId project.PUBLISH_GROUP_ID
+            artifactId project.PUBLISH_ARTIFACT_ID
+            version project.PUBLISH_VERSION
+        }
+    }
+}
+repositories {
+    mavenCentral()
+}
 

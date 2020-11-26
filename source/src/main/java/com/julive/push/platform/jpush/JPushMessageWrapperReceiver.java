@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.julive.push.common.PushUtils;
 import com.julive.push.core.PushListenerProxy;
+import com.julive.push.core.PushMessage;
 import com.julive.push.core.PushType;
 
 import cn.jpush.android.api.CmdMessage;
@@ -38,8 +39,9 @@ public class JPushMessageWrapperReceiver extends JPushMessageReceiver {
     @Override
     public void onNotifyMessageOpened(Context context, NotificationMessage notificationMessage) {
         Log.e(PUSH_TAG, PUSH_LOG_CLICK + PushType.JPUSH.getName());
-        PushListenerProxy.onNotificationOpened(notificationMessage.toString(), PushType.JPUSH);
-        PushUtils.onNotificationMessageOpened(context, PushType.JPUSH, notificationMessage.toString());
+        PushMessage pushMessage = new PushMessage(notificationMessage.notificationTitle, notificationMessage.notificationContent, PushType.JPUSH, notificationMessage.notificationExtras, null);
+        PushListenerProxy.onNotificationOpened(pushMessage);
+        PushUtils.onNotificationMessageOpened(context, pushMessage);
         super.onNotifyMessageOpened(context, notificationMessage);
     }
 
@@ -60,8 +62,8 @@ public class JPushMessageWrapperReceiver extends JPushMessageReceiver {
     @Override
     public void onNotifyMessageArrived(Context context, NotificationMessage notificationMessage) {
         Log.e(PUSH_TAG, PUSH_LOG_ARRIVED + PushType.JPUSH.getName());
-        PushListenerProxy.onNotificationReceived(notificationMessage.toString(), PushType.JPUSH);
-        PushUtils.onNotificationMessageArrived(context, PushType.JPUSH, notificationMessage.toString());
+        PushMessage pushMessage = new PushMessage(notificationMessage.notificationTitle, notificationMessage.notificationContent, PushType.JPUSH, notificationMessage.notificationExtras, null);
+        PushUtils.onNotificationMessageArrived(context, pushMessage);
         super.onNotifyMessageArrived(context, notificationMessage);
     }
 

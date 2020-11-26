@@ -21,25 +21,23 @@ public abstract class PushReceiver extends BroadcastReceiver {
             return;
         }
 
-        String message = intent.getStringExtra(PushConst.MESSAGE);
+        PushMessage message = (PushMessage) intent.getSerializableExtra(PushConst.MESSAGE);
         if (message == null) {
             Log.e(TAG, "message is null. Return directly!");
             return;
         }
-        PushType pushType = PushType.getType(intent.getStringExtra(PushConst.PUSH_TYPE));
-
         if (intent.getAction().equals(PushConst.ACTION_NOTIFICATION_MESSAGE_ARRIVED)) {
-            if (!onNotificationMessageArrived(context, pushType, message)) {
+            if (!onNotificationMessageArrived(context, message)) {
                 //默认处理
             }
         } else if (intent.getAction().equals(PushConst.ACTION_NOTIFICATION_MESSAGE_CLICKED)) {
-            if (!onNotificationMessageClicked(context, pushType, message)) {
+            if (!onNotificationMessageClicked(context, message)) {
                 //默认处理
             }
         }
     }
 
-    public abstract boolean onNotificationMessageArrived(Context context, PushType pushType, String notificationMessage);
+    public abstract boolean onNotificationMessageArrived(Context context, PushMessage message);
 
-    public abstract boolean onNotificationMessageClicked(Context context, PushType pushType, String notificationMessage);
+    public abstract boolean onNotificationMessageClicked(Context context, PushMessage message);
 }

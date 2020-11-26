@@ -39,21 +39,21 @@ public class PushListenerProxy {
     /**
      * 通知栏消息抵达
      */
-    public static void onNotificationReceived(String message, PushType pushType) {
+    public static void onNotificationReceived(PushMessage pushMessage) {
         if (mOnPushActionListener == null) {
             return;
         }
-        mOnPushActionListener.onNotificationReceived(message, pushType);
+        mOnPushActionListener.onNotificationReceived(pushMessage);
     }
 
     /**
      * 通知栏消息打开
      */
-    public static void onNotificationOpened(String message, PushType pushType) {
+    public static void onNotificationOpened(PushMessage pushMessage) {
         if (mOnPushActionListener == null) {
             return;
         }
-        mOnPushActionListener.onNotificationOpened(message, pushType);
+        mOnPushActionListener.onNotificationOpened(pushMessage);
     }
 
     /**

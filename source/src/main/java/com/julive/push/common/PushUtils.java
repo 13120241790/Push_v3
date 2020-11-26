@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.julive.push.core.PushMessage;
 import com.julive.push.core.PushType;
 
 import static com.julive.push.common.PushConst.MESSAGE;
@@ -78,17 +79,13 @@ public class PushUtils {
      * 推送通知到达的事件回调. 使用第三方通知栏方式推送时，由手机系统层弹出通知后，再回调此事件。
      * <p> 回调此方法时，通知栏已经弹出，故无法自定义通知的显示</p>
      *
-     * @param context                 上下文
-     * @param pushType                推送类型
-     * @param pushNotificationMessage 通知消息
+     * @param context 上下文
      */
-    public static void onNotificationMessageArrived(Context context, PushType pushType, String pushNotificationMessage) {
-        Log.d(TAG, "onNotificationMessageArrived is called. " + pushNotificationMessage);
-
+    public static void onNotificationMessageArrived(Context context, PushMessage pushMessage) {
+        Log.d(TAG, "onNotificationMessageArrived is called. " + pushMessage.toString());
         Intent intent = new Intent();
         intent.setAction(PushConst.ACTION_NOTIFICATION_MESSAGE_ARRIVED);
-        intent.putExtra(PUSH_TYPE, pushType.getName());
-        intent.putExtra(MESSAGE, pushNotificationMessage);
+        intent.putExtra(MESSAGE, pushMessage);
         intent.setPackage(context.getPackageName());
         context.sendBroadcast(intent);
     }
@@ -96,17 +93,14 @@ public class PushUtils {
     /**
      * 推送通知被点击时回调
      *
-     * @param context                 上下文
-     * @param pushType                推送类型
-     * @param pushNotificationMessage 通知消息
+     * @param context 上下文
      */
-    public static void onNotificationMessageOpened(Context context, PushType pushType, String pushNotificationMessage) {
-        Log.d(TAG, "onNotificationMessageOpened is called. " + pushNotificationMessage);
+    public static void onNotificationMessageOpened(Context context, PushMessage pushMessage) {
+        Log.d(TAG, "onNotificationMessageOpened is called. " + pushMessage.toString());
 
         Intent intent = new Intent();
         intent.setAction(PushConst.ACTION_NOTIFICATION_MESSAGE_CLICKED);
-        intent.putExtra(PUSH_TYPE, pushType.getName());
-        intent.putExtra(MESSAGE, pushNotificationMessage);
+        intent.putExtra(MESSAGE, pushMessage);
         intent.setPackage(context.getPackageName());
         context.sendBroadcast(intent);
     }

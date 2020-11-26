@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 
+import com.julive.push.core.PushMessage;
 import com.julive.push.core.PushReceiver;
 import com.julive.push.core.PushType;
 
@@ -15,17 +16,17 @@ public class AppPushReceiver extends PushReceiver {
     public static final String TAG = AppPushReceiver.class.getSimpleName();
 
     @Override
-    public boolean onNotificationMessageArrived(Context context, PushType pushType, String notificationMessage) {
-        Log.e(TAG, "onNotificationMessageArrived push type ：" + pushType + " message ：" + notificationMessage);
+    public boolean onNotificationMessageArrived(Context context, PushMessage pushMessage) {
+        Log.e(TAG, "onNotificationMessageArrived push type ：" + pushMessage.getPushType() + " message ：" + pushMessage.toString());
         return false;
     }
 
     @Override
-    public boolean onNotificationMessageClicked(Context context, PushType pushType, String notificationMessage) {
-        Log.e(TAG, "onNotificationMessageClicked push type ：" + pushType + " message ：" + notificationMessage);
+    public boolean onNotificationMessageClicked(Context context, PushMessage pushMessage) {
+        Log.e(TAG, "onNotificationMessageClicked push type ：" + pushMessage.getPushType() + " message ：" + pushMessage.toString());
         Log.e(TAG, context.toString());
 
-        if (pushType == PushType.XIAOMI) {
+        if (pushMessage.getPushType() == PushType.XIAOMI) {
             //小米后台客户端自定义跳转点击通知栏事件
             Intent i = new Intent(context, MainActivity.class);
             i.addFlags(FLAG_ACTIVITY_NEW_TASK);

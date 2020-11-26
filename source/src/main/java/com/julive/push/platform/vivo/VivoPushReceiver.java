@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.julive.push.common.PushUtils;
 import com.julive.push.core.PushListenerProxy;
+import com.julive.push.core.PushMessage;
 import com.julive.push.core.PushType;
 import com.vivo.push.model.UPSNotificationMessage;
 import com.vivo.push.sdk.OpenClientPushMessageReceiver;
@@ -21,8 +22,9 @@ public class VivoPushReceiver extends OpenClientPushMessageReceiver {
     @Override
     public void onNotificationMessageClicked(Context context, UPSNotificationMessage msg) {
         Log.e(PUSH_TAG, "vivio onNotificationMessageClicked  : " + msg.getContent());
-        PushListenerProxy.onNotificationOpened(msg.getContent(), PushType.VIVO);
-        PushUtils.onNotificationMessageOpened(context, PushType.VIVO, msg.getContent());
+        PushMessage pushMessage = new PushMessage(msg.getTitle(), msg.getContent(), PushType.VIVO, "", msg.getParams());
+        PushListenerProxy.onNotificationOpened(pushMessage);
+        PushUtils.onNotificationMessageOpened(context, pushMessage);
     }
 
     /***

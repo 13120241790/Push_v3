@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.julive.push.common.PushUtils;
+import com.julive.push.core.PushMessage;
 import com.julive.push.core.PushListenerProxy;
 import com.julive.push.core.PushType;
 import com.xiaomi.mipush.sdk.ErrorCode;
@@ -56,8 +57,9 @@ public class MIPushMessageReceiver extends PushMessageReceiver {
         Log.e(PUSH_TAG, PUSH_LOG_CLICK + PushType.XIAOMI.getName());
         Log.e("PushMessage", " click message string : " + message.toString());
         mMessage = message.getContent();
-        PushListenerProxy.onNotificationOpened(message.toString(), PushType.XIAOMI);
-        PushUtils.onNotificationMessageOpened(context, PushType.XIAOMI, message.toString());
+        PushMessage msg = new PushMessage(message.getTitle(), message.getDescription(), PushType.XIAOMI, message.getExtra().toString(), message.getExtra());
+        PushListenerProxy.onNotificationReceived(msg);
+        PushUtils.onNotificationMessageOpened(context, msg);
 
         if (!TextUtils.isEmpty(message.getTopic())) {
             mTopic = message.getTopic();
@@ -74,8 +76,9 @@ public class MIPushMessageReceiver extends PushMessageReceiver {
         Log.e(PUSH_TAG, PUSH_LOG_ARRIVED + PushType.XIAOMI.getName());
         Log.e("PushMessage", "arrived message string : " + message.toString());
         mMessage = message.getContent();
-        PushListenerProxy.onNotificationReceived(message.toString(), PushType.XIAOMI);
-        PushUtils.onNotificationMessageArrived(context, PushType.XIAOMI, message.toString());
+        PushMessage msg = new PushMessage(message.getTitle(), message.getDescription(), PushType.XIAOMI, message.getExtra().toString(), message.getExtra());
+        PushListenerProxy.onNotificationReceived(msg);
+        PushUtils.onNotificationMessageArrived(context, msg);
         if (!TextUtils.isEmpty(message.getTopic())) {
             mTopic = message.getTopic();
         } else if (!TextUtils.isEmpty(message.getAlias())) {

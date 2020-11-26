@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.julive.push.platform.oppo">
+
+    <application>
+        <!--OPPO start-->
+        <meta-data
+            android:name="OPPO_APPKEY"
+            android:value="${OPPO_APPKEY}" />
+        <meta-data
+            android:name="OPPO_SECRET"
+            android:value="${OPPO_SECRET}" />
+        <!--OPPO end-->
+    </application>
+
+</manifest>

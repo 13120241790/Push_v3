@@ -13,6 +13,9 @@ import com.julive.push.platform.mi.MiPush;
 import com.julive.push.platform.oppo.OppoPush;
 import com.julive.push.platform.vivo.VivoPush;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.julive.push.common.PushConst.PUSH_TAG;
 
 
@@ -34,40 +37,47 @@ public class PushClient {
             throw new NullPointerException("Push Status Listener is empty~!");
         }
         PushListenerProxy.setStatusListener(pushStatusListener);
-        PushType currentPushType;
-        if (config.getOnlyPush() != null) {
-            currentPushType = config.getOnlyPush();
+        List<PushType> currentPushTypes;
+        if (config.getPushTypes().size() > 0) {
+            currentPushTypes = config.getPushTypes();
+            if (config.isIncludeDefaultPlatform() && !(config.getPushTypes().contains(PushUtils.getCurrentPushType(context)))) {
+                currentPushTypes.add(PushUtils.getCurrentPushType(context));
+            }
         } else {
-            currentPushType = PushUtils.getCurrentPushType(context); //获取当前设备品牌
-            Log.e(PUSH_TAG, "current devices type is :" + currentPushType.getName());
+            currentPushTypes = new ArrayList<>();
+            currentPushTypes.add(PushUtils.getCurrentPushType(context));//获取当前设备品牌
+            Log.e(PUSH_TAG, "current devices type is :" + PushUtils.getCurrentPushType(context).getName());
         }
-        IPush push = null;
-        if (currentPushType == PushType.HUAWEI) {
-            if (foundSDK("com.huawei.hms.api.HuaweiApiClient")) {
-                push = new HWPush();
+
+        for (PushType pushType : currentPushTypes) {
+            IPush push = null;
+            if (pushType == PushType.HUAWEI) {
+                if (foundSDK("com.huawei.hms.api.HuaweiApiClient")) {
+                    push = new HWPush();
+                }
+            } else if (pushType == PushType.XIAOMI) {
+                if (foundSDK("com.xiaomi.mipush.sdk.MiPushClient")) {
+                    push = new MiPush();
+                }
+            } else if (pushType == PushType.VIVO) {
+                if (foundSDK("com.vivo.push.PushClient")) {
+                    push = new VivoPush();
+                }
+            } else if (pushType == PushType.OPPO) {
+                if (foundSDK("com.julive.push.platform.oppo.OppoUtils")) {
+                    push = new OppoPush();
+                }
+            } else if (pushType == PushType.JPUSH) {
+                if (foundSDK("cn.jpush.android.api.JPushInterface")) {
+                    push = new JPush();
+                }
             }
-        } else if (currentPushType == PushType.XIAOMI) {
-            if (foundSDK("com.xiaomi.mipush.sdk.MiPushClient")) {
-                push = new MiPush();
+            if (push == null) {
+                Log.e(PUSH_TAG, "Current platform SDK not found!");
+                continue;
             }
-        } else if (currentPushType == PushType.VIVO) {
-            if (foundSDK("com.vivo.push.PushClient")) {
-                push = new VivoPush();
-            }
-        } else if (currentPushType == PushType.OPPO) {
-            if (foundSDK("com.heytap.msp.push.HeytapPushManager")) {
-                push = new OppoPush();
-            }
-        }else {
-            if (foundSDK("cn.jpush.android.api.JPushInterface")) {
-                push = new JPush();
-            }
+            push.register(context, config);
         }
-        if (push == null) {
-            Log.e(PUSH_TAG, "Current platform SDK not found!");
-            return;
-        }
-        push.register(context, config);
     }
 
 

@@ -39,7 +39,11 @@ android {
                     VIVO_APPKEY  : "c112ae30cc14d70eb2887d8383776ca4",
 
                     OPPO_APPKEY  : "4834d842ac03433c8b6ea7576657f705",
-                    OPPO_SECRET  : "9b3bfa75ca394e8296318fa251380255"
+                    OPPO_SECRET  : "9b3bfa75ca394e8296318fa251380255",
+
+                    HUAWEI_HOST : "comjia.julive",
+                    HUAWEI_PATH : "/push",
+                    HUAWEI_SCHEME : "julive"  //   julive://comjia.julive/push?id=10086
             ]
         }
         release {
@@ -60,7 +64,11 @@ android {
                     VIVO_APPKEY  : "c112ae30cc14d70eb2887d8383776ca4",
 
                     OPPO_APPKEY  : "4834d842ac03433c8b6ea7576657f705",
-                    OPPO_SECRET  : "9b3bfa75ca394e8296318fa251380255"
+                    OPPO_SECRET  : "9b3bfa75ca394e8296318fa251380255",
+
+                    HUAWEI_HOST : "comjia.julive",
+                    HUAWEI_PATH : "/push",
+                    HUAWEI_SCHEME : "julive"
             ]
         }
     }
@@ -72,15 +80,17 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation project(path: ':source')
-//    implementation project(path: ':library')
-//    //极光
-//    implementation 'cn.jiguang.sdk:jpush:3.3.6'
-//    implementation 'cn.jiguang.sdk:jcore:2.1.6'
-//    //小米
-//    implementation files('libs/MiPush_SDK_Client_3_6_19.jar')
-//    //华为
-//    api 'com.huawei.android.hms:base:2.6.3.301'
-//    api 'com.huawei.android.hms:push:2.6.3.301'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+
+//    implementation project(path: ':source')  //源码依赖
+
+//远程依赖
+//    implementation 'com.comjia.push:vivo:1.0.0'
+//    implementation 'com.comjia.push:oppo:1.1.7'
+//    implementation 'com.comjia.push:jiguang:1.0.3'
+//    implementation 'com.comjia.push:xiaomi:1.0.2'
+    implementation 'com.comjia.push:huawei:1.0.3'
+    implementation 'com.julive.push:core:2.0.1'
+
 }

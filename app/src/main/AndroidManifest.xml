@@ -74,13 +74,26 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data
                     android:host="app.comjia.com"
                     android:path="/oppopush"
                     android:scheme="push" />
             </intent-filter>
         </activity>
+        <!--push://app.comjia.com/oppopush?goodsId=10011002 按照此例子协议可以自定义配置 在 OPPO 后台为 schemeUrl 配置 -->
 
+        <activity android:name=".HuaweiPushDispatchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="${HUAWEI_HOST}"
+                    android:path="${HUAWEI_PATH}"
+                    android:scheme="${HUAWEI_SCHEME}" />
+            </intent-filter>
+        </activity>
+        <!--尝试华为 自定义协议跳转 push://app.comjia.com/huaweipush?id=10086  可通过服务 api 约定协议 或者走 web 平台打开自定义页面-->
     </application>
 
 </manifest>

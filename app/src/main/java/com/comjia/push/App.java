@@ -19,7 +19,7 @@ public class App extends Application {
         super.onCreate();
         //初始化push推送服务
         if (shouldInit()) {
-            PushClient.init(this, new PushConfig(), new PushStatusListener() {
+            PushClient.init(this, new PushConfig().addPushType(PushType.JPUSH).includeDefaultPlatform(), new PushStatusListener() {
                 @Override
                 public void onRegister(String registerId, PushType pushType) {
                     Log.e(App.class.getSimpleName(), "push type: " + pushType.getName() + " push regId :" + registerId);

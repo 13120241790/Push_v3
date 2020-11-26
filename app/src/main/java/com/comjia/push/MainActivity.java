@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.julive.push.OnPushActionListener;
 import com.julive.push.core.PushClient;
+import com.julive.push.core.PushMessage;
 import com.julive.push.core.PushType;
 
 
@@ -20,13 +21,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         PushClient.setOnPushActionListener(new OnPushActionListener() {
             @Override
-            public void onNotificationReceived(String message, PushType pushType) {
-                Log.e(TAG, "Listener onNotificationReceived pushType：" + pushType.getName() + " message：" + message);
+            public void onNotificationReceived(PushMessage pushMessage) {
+                Log.e(TAG, "Listener onNotificationReceived pushType：" + pushMessage.getPushType() + " message：" + pushMessage.toString());
             }
 
             @Override
-            public void onNotificationOpened(String message, PushType pushType) {
-                Log.e(TAG, "Listener onNotificationOpened pushType：" + pushType.getName() + " message：" + message);
+            public void onNotificationOpened(PushMessage pushMessage) {
+                Log.e(TAG, "Listener onNotificationOpened pushType：" + pushMessage.getPushType() + " message：" + pushMessage.toString());
             }
 
             @Override
