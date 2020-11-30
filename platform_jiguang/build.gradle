@@ -11,7 +11,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0.3"
+        versionName "2.0.1"
     }
 
     compileOptions {
@@ -23,10 +23,11 @@ android {
 dependencies {
     api 'cn.jiguang.sdk:jpush:3.3.6'
     api 'cn.jiguang.sdk:jcore:2.1.6'
+    api 'com.julive.push:core:2.0.1'
 }
 
 ext {
-    PUBLISH_GROUP_ID = 'com.comjia.push'
+    PUBLISH_GROUP_ID = 'com.julive.push'
     PUBLISH_ARTIFACT_ID = 'jiguang'
     PUBLISH_VERSION = android.defaultConfig.versionName
 }

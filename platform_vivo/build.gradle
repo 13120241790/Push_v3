@@ -8,10 +8,10 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0.0"
+        versionName "2.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -31,10 +31,11 @@ android {
 
 dependencies {
     api 'com.vivo.push:push:2.9.0'
+    api 'com.julive.push:core:2.0.1'
 }
 
 ext {
-    PUBLISH_GROUP_ID = 'com.comjia.push'
+    PUBLISH_GROUP_ID = 'com.julive.push'
     PUBLISH_ARTIFACT_ID = 'vivo'
     PUBLISH_VERSION = android.defaultConfig.versionName
 }

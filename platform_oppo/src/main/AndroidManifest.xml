@@ -11,6 +11,18 @@
             android:name="OPPO_SECRET"
             android:value="${OPPO_SECRET}" />
         <!--OPPO end-->
+        <activity
+            android:name=".OppoDispatchActivity"
+            android:theme="@style/DispatchTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="${OPPO_HOST}"
+                    android:path="${OPPO_PATH}"
+                    android:scheme="${OPPO_SCHEME}" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

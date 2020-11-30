@@ -1,9 +1,9 @@
 package com.comjia.push;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.julive.push.OnPushActionListener;
 import com.julive.push.core.PushClient;

@@ -130,6 +130,19 @@
                     android:scheme="customscheme" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".HuaweiDispatchActivity"
+            android:theme="@style/DispatchTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="${HUAWEI_HOST}"
+                    android:path="${HUAWEI_PATH}"
+                    android:scheme="${HUAWEI_SCHEME}" />
+            </intent-filter>
+        </activity>
+
 
         <!-- 华为推送 end -->
     </application>

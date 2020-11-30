@@ -71,15 +71,15 @@
             android:configChanges="screenSize|smallestScreenSize|screenLayout"
             android:launchMode="singleTask"
             android:screenOrientation="behind">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
 
-                <data
-                    android:host="app.comjia.com"
-                    android:path="/oppopush"
-                    android:scheme="push" />
-            </intent-filter>
+<!--                <data-->
+<!--                    android:host="app.comjia.com"-->
+<!--                    android:path="/oppopush"-->
+<!--                    android:scheme="push" />-->
+<!--            </intent-filter>-->
         </activity>
         <!--push://app.comjia.com/oppopush?goodsId=10011002 按照此例子协议可以自定义配置 在 OPPO 后台为 schemeUrl 配置 -->
 

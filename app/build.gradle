@@ -30,20 +30,25 @@ android {
                     JPUSH_APPKEY : "0dc337f2661e3264374bcd05", //JPush 上注册的包名对应的 Appkey.
                     JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
 
-                    HUAWEI_APPID : "101221803",
-
                     XIAOMI_APPID : "xiaomi_2882303761518212082",
                     XIAOMI_APPKEY: "xiaomi_5671821258082",
 
                     VIVO_APPID   : "105005813",
                     VIVO_APPKEY  : "c112ae30cc14d70eb2887d8383776ca4",
 
+                    OPPO_HOST : "comjia.julive", //OPPO 协议跳转 收到通知后打开应用内指定页面使用 如果不使用 manifestPlaceholders 也需要做声明
+                    OPPO_PATH : "/oppopush",
+                    OPPO_SCHEME : "julive",  //julive://comjia.julive/oppopush?id=10086
+
                     OPPO_APPKEY  : "4834d842ac03433c8b6ea7576657f705",
                     OPPO_SECRET  : "9b3bfa75ca394e8296318fa251380255",
 
-                    HUAWEI_HOST : "comjia.julive",
-                    HUAWEI_PATH : "/push",
-                    HUAWEI_SCHEME : "julive"  //   julive://comjia.julive/push?id=10086
+
+                    HUAWEI_APPID : "101221803",
+
+                    HUAWEI_HOST : "comjia.julive",  //HUAWEI 协议跳转 收到通知后打开应用内指定页面使用 如果不使用 manifestPlaceholders 也需要做声明
+                    HUAWEI_PATH : "/huaweipush",
+                    HUAWEI_SCHEME : "julive"
             ]
         }
         release {
@@ -55,19 +60,22 @@ android {
                     JPUSH_APPKEY : "0dc337f2661e3264374bcd05", //JPush 上注册的包名对应的 Appkey.
                     JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
 
-                    HUAWEI_APPID : "101221803",
-
                     XIAOMI_APPID : "xiaomi_2882303761518212082",
                     XIAOMI_APPKEY: "xiaomi_5671821258082",
 
                     VIVO_APPID   : "105005813",
                     VIVO_APPKEY  : "c112ae30cc14d70eb2887d8383776ca4",
 
+
+                    OPPO_HOST : "comjia.julive", //OPPO 协议跳转 收到通知后打开应用内指定页面使用
+                    OPPO_PATH : "/oppopush",
+                    OPPO_SCHEME : "julive",
                     OPPO_APPKEY  : "4834d842ac03433c8b6ea7576657f705",
                     OPPO_SECRET  : "9b3bfa75ca394e8296318fa251380255",
 
-                    HUAWEI_HOST : "comjia.julive",
-                    HUAWEI_PATH : "/push",
+                    HUAWEI_APPID : "101221803",
+                    HUAWEI_HOST : "comjia.julive",  //HUAWEI 协议跳转 收到通知后打开应用内指定页面使用
+                    HUAWEI_PATH : "/huaweipush",
                     HUAWEI_SCHEME : "julive"
             ]
         }
@@ -86,11 +94,13 @@ dependencies {
 //    implementation project(path: ':source')  //源码依赖
 
 //远程依赖
-//    implementation 'com.comjia.push:vivo:1.0.0'
-//    implementation 'com.comjia.push:oppo:1.1.7'
-//    implementation 'com.comjia.push:jiguang:1.0.3'
-//    implementation 'com.comjia.push:xiaomi:1.0.2'
-    implementation 'com.comjia.push:huawei:1.0.3'
-    implementation 'com.julive.push:core:2.0.1'
+    implementation 'com.julive.push:vivo:2.0.1'
+    implementation 'com.julive.push:oppo:2.0.1'
+    implementation 'com.julive.push:xiaomi:2.0.1'
+    implementation 'com.julive.push:huawei:2.0.1'
+    implementation 'com.julive.push:jiguang:2.0.1'
+
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.10'
+
 
 }

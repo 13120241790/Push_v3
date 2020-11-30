@@ -11,16 +11,17 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0.2"
+        versionName "2.0.1"
     }
 }
 
 dependencies {
     api files('libs/MiPush_SDK_Client_3_6_19.jar')
+    api 'com.julive.push:core:2.0.1'
 }
 
 ext {
-    PUBLISH_GROUP_ID = 'com.comjia.push'
+    PUBLISH_GROUP_ID = 'com.julive.push'
     PUBLISH_ARTIFACT_ID = 'xiaomi'
     PUBLISH_VERSION = android.defaultConfig.versionName
 }

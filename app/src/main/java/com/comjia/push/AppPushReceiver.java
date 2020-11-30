@@ -31,6 +31,18 @@ public class AppPushReceiver extends PushReceiver {
             Intent i = new Intent(context, MainActivity.class);
             i.addFlags(FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
+        } else if (pushMessage.getPushType() == PushType.HUAWEI) {
+            Intent i = new Intent(context, MainActivity.class);
+            i.addFlags(FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
+        } else if (pushMessage.getPushType() == PushType.OPPO) {
+            Intent i = new Intent(context, MainActivity.class);
+            i.addFlags(FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
+        } else if (pushMessage.getPushType() == PushType.JPUSH) {
+            Intent i = new Intent(context, MainActivity.class);//极光受限于 Android 系统，应用级别的推送杀死进程无法收到 Push 消息(消息当时暂存在极光服务器再次打开应用时会马上收到暂存推送)，极光更适用于推送重要级别低的通知
+            i.addFlags(FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
         }
         return false;
     }

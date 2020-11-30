@@ -11,7 +11,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
-        versionName "1.1.7"
+        versionName "2.0.1"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -21,10 +21,11 @@ android {
 
 dependencies {
     api 'com.heytap.msp:push:2.1.0'
+    api 'com.julive.push:core:2.0.1'
 }
 
 ext {
-    PUBLISH_GROUP_ID = 'com.comjia.push'
+    PUBLISH_GROUP_ID = 'com.julive.push'
     PUBLISH_ARTIFACT_ID = 'oppo'
     PUBLISH_VERSION = android.defaultConfig.versionName
 }
