@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.huawei.hms.support.api.push.PushReceiver;
 import com.julive.push.core.PushListenerProxy;
+import com.julive.push.core.PushMessage;
 import com.julive.push.core.PushType;
 
 import static com.julive.push.common.PushConst.PUSH_TAG;
@@ -30,7 +31,8 @@ public class HMSReceiver extends PushReceiver {
         try {
             String content = new String(msg, "UTF-8");
             Log.d(TAG, "onPushMsg content : " + content);
-            PushListenerProxy.onTransparentMessage(content, PushType.HUAWEI);
+            PushMessage pushMessage = new PushMessage("","",PushType.HUAWEI,content,null);
+            PushListenerProxy.onTransparentMessage(pushMessage);
         } catch (Exception e) {
             e.printStackTrace();
         }

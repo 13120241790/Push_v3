@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.julive.push.platform.oppo">
 
+    <!-- ********OPPO 推送 start******** -->
+    <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE" />
+    <uses-permission android:name="com.heytap.mcs.permission.RECIEVE_MCS_MESSAGE" />
+    <!-- ********OPPO 推送 end******** -->
+
     <application>
         <!--OPPO start-->
         <meta-data

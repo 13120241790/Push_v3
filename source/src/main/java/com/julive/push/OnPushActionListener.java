@@ -18,5 +18,5 @@ public interface OnPushActionListener {
     /**
      * 透传消息
      */
-    void onTransparentMessage(String message, PushType pushType);
+    void onTransparentMessage(PushMessage pushMessage);
 }

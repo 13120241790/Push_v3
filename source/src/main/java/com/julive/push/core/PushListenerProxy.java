@@ -59,11 +59,11 @@ public class PushListenerProxy {
     /**
      * 部分平台的透传消息
      */
-    public static void onTransparentMessage(String message, PushType pushType) {
+    public static void onTransparentMessage(PushMessage pushMessage) {
         if (mOnPushActionListener == null) {
             return;
         }
-        mOnPushActionListener.onTransparentMessage(message, pushType);
+        mOnPushActionListener.onTransparentMessage(pushMessage);
     }
 
 

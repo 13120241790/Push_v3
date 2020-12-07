@@ -11,7 +11,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
-        versionName "2.0.1"
+        versionName "2.0.2"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -22,7 +22,7 @@ android {
 dependencies {
     api 'com.huawei.android.hms:base:2.6.3.301'
     api 'com.huawei.android.hms:push:2.6.3.301'
-    api 'com.julive.push:core:2.0.1'
+    api 'com.julive.push:core:2.0.2'
 }
 
 ext {

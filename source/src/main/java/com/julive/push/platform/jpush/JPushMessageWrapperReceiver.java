@@ -31,7 +31,8 @@ public class JPushMessageWrapperReceiver extends JPushMessageReceiver {
     //自定义消息走 on message 理解为透传
     @Override
     public void onMessage(Context context, CustomMessage customMessage) {
-        PushListenerProxy.onTransparentMessage(customMessage.toString(), PushType.JPUSH);
+        PushMessage pushMessage = new PushMessage(customMessage.title,customMessage.message,PushType.JPUSH,customMessage.extra,null);
+        PushListenerProxy.onTransparentMessage(pushMessage);
         Log.e(TAG, "onMessage : " + customMessage.message);
         super.onMessage(context, customMessage);
     }

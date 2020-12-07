@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTransparentMessage(String message, PushType pushType) {
-                Log.e(TAG, "Listener onTransparentMessage pushType：" + pushType.getName() + " message：" + message);
+            public void onTransparentMessage(PushMessage pushMessage) {
+                Log.e(TAG, "Listener onTransparentMessage pushType：" + pushMessage.getPushType().getName() + " message " + pushMessage.toString());
             }
         });
     }

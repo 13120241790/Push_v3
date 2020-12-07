@@ -41,7 +41,8 @@ public class MIPushMessageReceiver extends PushMessageReceiver {
     public void onReceivePassThroughMessage(Context context, MiPushMessage message) {
         mMessage = message.getContent();
         Log.e("PushMessage", "onTransparentMessage : " + message.toString());
-        PushListenerProxy.onTransparentMessage(message.toString(), PushType.XIAOMI);
+        PushMessage pushMessage = new PushMessage(message.getTitle(), message.getDescription(), PushType.XIAOMI, message.getExtra().toString(), message.getExtra());
+        PushListenerProxy.onTransparentMessage(pushMessage);
         if (!TextUtils.isEmpty(message.getTopic())) {
             mTopic = message.getTopic();
         } else if (!TextUtils.isEmpty(message.getAlias())) {
