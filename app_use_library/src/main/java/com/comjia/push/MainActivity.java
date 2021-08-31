@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.julive.push.OnPushActionListener;
 import com.julive.push.core.PushClient;
-import com.julive.push.core.PushType;
+import com.julive.push.core.PushMessage;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,18 +20,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         PushClient.setOnPushActionListener(new OnPushActionListener() {
             @Override
-            public void onNotificationReceived(String message, PushType pushType) {
-                Log.e(TAG, "Listener onNotificationReceived pushType：" + pushType.getName() + " message：" + message);
+            public void onNotificationReceived(PushMessage pushMessage) {
+                Log.e(TAG, "Listener onNotificationReceived pushType：" + pushMessage.getPushType() + " message：" + pushMessage.toString());
             }
 
             @Override
-            public void onNotificationOpened(String message, PushType pushType) {
-                Log.e(TAG, "Listener onNotificationOpened pushType：" + pushType.getName() + " message：" + message);
+            public void onNotificationOpened(PushMessage pushMessage) {
+                Log.e(TAG, "Listener onNotificationOpened pushType：" + pushMessage.getPushType() + " message：" + pushMessage.toString());
             }
 
             @Override
-            public void onTransparentMessage(String message, PushType pushType) {
-                Log.e(TAG, "Listener onTransparentMessage pushType：" + pushType.getName() + " message：" + message);
+            public void onTransparentMessage(PushMessage pushMessage) {
+                Log.e(TAG, "Listener onTransparentMessage pushType：" + pushMessage.getPushType().getName() + " message " + pushMessage.toString());
             }
         });
     }

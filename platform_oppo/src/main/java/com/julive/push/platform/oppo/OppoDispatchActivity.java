@@ -17,7 +17,10 @@ public class OppoDispatchActivity extends Activity {
         Intent i = getIntent();
         Uri uri = i.getData();
         Log.e("JLPush", "OppoDispatchActivity");
-        PushMessage pushMessage = new PushMessage("", "", PushType.OPPO, uri.toString(), null);
+        PushMessage pushMessage = null;
+        if (uri != null) {
+            pushMessage = new PushMessage("", "", PushType.OPPO, uri.toString(), null);
+        }
         PushUtils.onNotificationMessageOpened(this, pushMessage);
         finish();
     }
