@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'maven'
+apply plugin: 'com.huawei.agconnect'
 
 android {
     compileSdkVersion 29
@@ -10,7 +11,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
-        versionName "2.0.4"
+        versionName "2.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -69,11 +70,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    api 'com.huawei.android.hms:base:2.6.3.301'
-    api 'com.huawei.android.hms:push:2.6.3.301'
+    api 'com.huawei.hms:push:5.3.0.304'
+
     api 'cn.jiguang.sdk:jpush:3.3.6'
     api 'cn.jiguang.sdk:jcore:2.1.6'
-    implementation "androidx.core:core-ktx:+"
+//    implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 

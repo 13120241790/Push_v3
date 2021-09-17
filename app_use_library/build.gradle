@@ -80,8 +80,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    api 'com.huawei.android.hms:base:2.6.3.301'
-    api 'com.huawei.android.hms:push:2.6.3.301'
     api 'cn.jiguang.sdk:jpush:3.3.6'
     api 'cn.jiguang.sdk:jcore:2.1.6'
 

@@ -15,21 +15,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!--如果是安卓8.0，应用编译配置的targetSdkVersion>=26，请务必添加以下权限 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-
-    <!-- 接收PUSH TOKEN的广播以及PUSH消息需要定义该权限 ${PACKAGE_NAME} 要替换上您应用的包名 -->
-    <permission
-        android:name="${applicationId}.permission.PROCESS_PUSH_MSG"
-        android:protectionLevel="signatureOrSystem" />
-    <!--接收PUSH TOKEN的广播以及PUSH消息需要定义该权限 ${PACKAGE_NAME} 要替换上您应用的包名 -->
-    <uses-permission android:name="${applicationId}.permission.PROCESS_PUSH_MSG" />
-
-    <!--PUSH Provider相关权限 -->
-    <permission
-        android:name="${applicationId}.permission.PUSH_PROVIDER"
-        android:protectionLevel="signatureOrSystem" />
-    <permission
-        android:name="${applicationId}.permission.PUSH_WRITE_PROVIDER"
-        android:protectionLevel="signatureOrSystem" />
     <!--华为权限结束-->
 
     <!--小米权限开始-->

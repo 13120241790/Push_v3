@@ -52,7 +52,7 @@ public class PushClient {
         for (PushType pushType : currentPushTypes) {
             IPush push = null;
             if (pushType == PushType.HUAWEI) {
-                if (foundSDK("com.huawei.hms.api.HuaweiApiClient")) {
+                if (foundSDK("com.huawei.hms.aaid.HmsInstanceId")) {
                     push = new HWPush();
                 }
             } else if (pushType == PushType.XIAOMI) {

@@ -94,11 +94,11 @@ dependencies {
 //    implementation project(path: ':source')  //源码依赖
 
 //远程依赖
-    implementation 'com.julive.push:vivo:2.0.2'
-    implementation 'com.julive.push:oppo:2.0.2'
-    implementation 'com.julive.push:xiaomi:2.0.2'
-    implementation 'com.julive.push:huawei:2.0.2'
-    implementation 'com.julive.push:jiguang:2.0.2'
+//    implementation 'com.julive.push:vivo:2.0.2'
+//    implementation 'com.julive.push:oppo:2.0.2'
+//    implementation 'com.julive.push:xiaomi:2.0.2'
+    implementation 'com.julive.push:huawei:2.0.4'
+//    implementation 'com.julive.push:jiguang:2.0.2'
 
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.10'
 
